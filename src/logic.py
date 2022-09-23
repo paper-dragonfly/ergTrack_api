@@ -1,30 +1,23 @@
 import json
 import yaml
 import psycopg2 
-from apps.api.post_classes import NewInterval, NewUser, NewWorkout
+from post_classes import NewInterval, NewUser, NewWorkout
 import pdb 
-import os
-from dotenv import load_dotenv
-
-load_dotenv() 
+import os 
 
 # get database parameters
-def config(db:str='dev_local', config_file:str='apps/api/config/config.yaml')-> dict:
+def config(db:str, config_file:str='config/config.yaml')-> dict:
     with open(f'{config_file}', 'r') as f:
         config_dict = yaml.safe_load(f) 
-    db_params = config_dict[db]
-    return db_params 
+    conn_str = config_dict[db][conn_str]
+    return conn_str
 
 
 # connect to database
+# db should be env but it's in so many places it's too much of a pain to change
 def db_connect(db:str, autocommit:bool = False):
-    if db == 'production':
-        conn = psycopg2.connect(os.getenv('DB_CONN_STR_INT'))    
-    elif db == 'dev_hybrid':
-        conn = psycopg2.connect(os.getenv('DB_CONN_STR_EXT'))
-    else:
-        params = config(db)
-        conn = psycopg2.connect(**params)
+    conn_str = config(db)
+    conn = psycopg2.connect(conn_str)
     cur = conn.cursor()
     conn.autocommit = autocommit
     return conn, cur

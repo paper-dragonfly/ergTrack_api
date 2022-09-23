@@ -1,12 +1,11 @@
-from logic import db_connect
+from src.logic import db_connect
 import pdb
-from dotenv import load_dotenv
 import os 
 
-print('Env vars loaded:', load_dotenv())
+ENV = os.getenv('ENVIRONMENT')
 
 def create_erg_db():
-    conn, cur = db_connect('create_dbs', True)
+    conn, cur = db_connect('create_dbs_local', True)
     cur.execute("SELECT datname FROM pg_database")
     db_list = cur.fetchall()
     if ('erg',) in db_list:
@@ -18,7 +17,7 @@ def create_erg_db():
 
 
 def create_test_db():
-    conn, cur = db_connect('create_dbs', True)
+    conn, cur = db_connect('create_dbs_local', True)
     cur.execute("SELECT datname FROM pg_database")
     db_list = cur.fetchall()
     # pdb.set_trace()
@@ -98,6 +97,6 @@ if __name__ == "__main__":
     create_test_db()
     initialize('dev_local')
     initialize('testing') 
-    #populate remote db fm local terminal
+    #generate remote db tables fm local terminal - for production too
     initialize('dev_hybrid') 
 

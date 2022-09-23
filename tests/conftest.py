@@ -1,6 +1,6 @@
 import pytest
-from apps.api.src.app import create_app
-from apps.api.src.logic import db_connect
+from src.app import create_app
+from src.logic import db_connect
 import pdb
 
 app = create_app('testing')
