@@ -1,0 +1,20 @@
+---
+dev_local:
+  host: localhost
+  # port: 5000
+  database: erg
+  user: katcha
+  password: null
+
+testing:
+  host: localhost
+  # port: 5000
+  database: erg_test
+  user: katcha
+  password: null 
+
+create_dbs: 
+  host: localhost
+  database: postgres
+  user: katcha
+  password: null

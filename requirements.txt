@@ -1,0 +1,7 @@
+Flask
+gunicorn
+psycopg2-binary
+pydantic
+pytest
+python-dotenv
+PyYAML
