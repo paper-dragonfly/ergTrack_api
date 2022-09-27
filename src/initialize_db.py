@@ -20,7 +20,6 @@ def create_test_db():
     conn, cur = db_connect('create_dbs_local', True)
     cur.execute("SELECT datname FROM pg_database")
     db_list = cur.fetchall()
-    # pdb.set_trace()
     if ('erg_test',) in db_list:
         print('erg_tests db already exists')
     else:

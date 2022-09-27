@@ -1,7 +1,7 @@
 import json
 import yaml
 import psycopg2 
-from post_classes import NewInterval, NewUser, NewWorkout
+from api.post_classes import NewInterval, NewUser, NewWorkout
 import pdb 
 import os 
 
@@ -9,7 +9,7 @@ import os
 def config(db:str, config_file:str='config/config.yaml')-> dict:
     with open(f'{config_file}', 'r') as f:
         config_dict = yaml.safe_load(f) 
-    conn_str = config_dict[db][conn_str]
+    conn_str = config_dict[db]['conn_str']
     return conn_str
 
 

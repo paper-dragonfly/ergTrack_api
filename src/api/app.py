@@ -1,8 +1,8 @@
 from flask import Flask, request 
 from pydantic import ValidationError 
-from post_classes import NewInterval, NewUser, NewWorkout
+from api.post_classes import NewInterval, NewUser, NewWorkout
 import json
-from src import logic as l
+from api import logic as l
 import pdb
 import os
 
