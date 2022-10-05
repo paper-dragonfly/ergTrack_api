@@ -10,13 +10,17 @@ def config(db:str, config_file:str='config/config.yaml')-> dict:
     with open(f'{config_file}', 'r') as f:
         config_dict = yaml.safe_load(f) 
     conn_str = config_dict[db]['conn_str']
-    return conn_str
+    host = config_dict[db]['host']
+    config_vars = {'conn_str':conn_str,'host':host}
+    print('config vars',db, config_vars)
+    return config_vars
 
 
 # connect to database
 # db should be env but it's in so many places it's too much of a pain to change
 def db_connect(db:str, autocommit:bool = False):
-    conn_str = config(db)
+    pdb.set_trace()
+    conn_str = config(db)['conn_str']
     conn = psycopg2.connect(conn_str)
     cur = conn.cursor()
     conn.autocommit = autocommit

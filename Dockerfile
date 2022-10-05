@@ -1,23 +1,34 @@
 FROM ubuntu 
+
+#install stuff
+RUN apt update
+RUN apt install -y python3
+RUN apt install -y python3-pip 
+RUN apt install -y python3.10-venv
+COPY requirements.txt .
+RUN pip install -r requirements.txt 
+# RUN apt install -y postgresql postgresql-contrib
+# RUN systemctl start postgresql.service
+
+#add files
 WORKDIR kaja
 RUN mkdir -p ./src
-RUN mkdir -p ./src/api 
 RUN mkdir -p ./tests
 RUN mkdir -p ./config 
 COPY src src 
-COPY requirements.txt .
-COPY post_classes.py .
-COPY config .
+COPY config config
+COPY README.md .
 COPY tests tests
-COPY initialize_db.py . 
-RUN apt update
-RUN apt install -y python3
-# RUN apt install -y postgresql-client
-RUN apt install -y python3-pip 
+COPY pyproject.toml . 
+COPY setup.cfg . 
+
+#build project into package
 RUN python3 -m pip install --upgrade build
-RUN pip install -r requirements.txt 
 RUN python3 -m build
 RUN python3 -m pip install -e . --no-deps
-CMD gunicorn src.app:app
-# --add-host=host:192.168.1.6.
+
+#run app
+EXPOSE 5000
+CMD python3 src/ergtrack_api/app.py
+# myIP: --add-host=Nicos-MacBook-Pro.local:192.168.1.6. 
 

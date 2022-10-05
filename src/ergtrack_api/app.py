@@ -11,6 +11,10 @@ ENV = os.getenv('ENVIRONMENT')
 def create_app(db):
     app = Flask(__name__) 
 
+    @app.route('/', methods=['GET'])
+    def home():
+        return 'HOME REACHED'
+
     @app.route('/users', methods=['GET', 'POST'])
     def users():
         if request.method == 'GET': #get user info
@@ -157,14 +161,17 @@ def create_app(db):
 #         conn.close()
 #         cur.close()
 #         return json.dumps({'status_code':200, 'message':None})
-    
+    print('I am running!')
     return app 
 
 if ENV != 'testing':
     app = create_app(ENV)
 
 if __name__ == '__main__':
-    if ENV=='dev_local' or ENV=='dev_hybrid':
-        app.run(host='localhost', port=5000, debug=True)
+    if ENV=='dev_local' or ENV=='dev_hybrid' or ENV =='dev_docker':
+        host = l.config(ENV)['host']
+        print(host)
+        app.run(host='0.0.0.0', debug=True)
+
 
 
