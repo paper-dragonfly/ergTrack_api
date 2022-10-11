@@ -11,13 +11,13 @@ ENV = os.getenv('ENVIRONMENT')
 # get database parameters
 def config(db:str, config_file:str='config/config.yaml')-> dict:
     print('ENV: ', ENV)
-    if ENV != 'production':
+    if ENV != 'production': #get gonfig info from yaml file
         with open(f'{config_file}', 'r') as f:
             config_dict = yaml.safe_load(f) 
         conn_str = config_dict[db]['conn_str']
         host = config_dict[db]['host']
         config_vars = {'conn_str':conn_str,'host':host}
-    if ENV=='production':
+    if ENV=='production': 
         PCS = os.getenv('PROD_CONN_STR')
         config_vars = {'conn_str':PCS,'host':'n/a'}
     print('config vars',db, config_vars)
