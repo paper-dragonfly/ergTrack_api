@@ -170,8 +170,7 @@ if ENV != 'testing':
 if __name__ == '__main__':
     if ENV=='dev_local' or ENV=='dev_hybrid' or ENV =='dev_docker':
         host = l.config(ENV)['host']
-        print(host)
-        app.run(host='0.0.0.0', debug=True)
+        app.run(host=host, debug=True)
 
 
 
