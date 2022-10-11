@@ -16,7 +16,7 @@ RUN mkdir -p ./src
 RUN mkdir -p ./tests
 RUN mkdir -p ./config 
 COPY src src 
-COPY config.yaml config
+# COPY config.yaml config
 COPY README.md .
 COPY tests tests
 COPY pyproject.toml . 
