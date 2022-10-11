@@ -10,23 +10,23 @@ ENV = os.getenv('ENVIRONMENT')
 
 # get database parameters
 def config(db:str, config_file:str='config/config.yaml')-> dict:
+    print('ENV: ', ENV)
     if ENV != 'production':
         with open(f'{config_file}', 'r') as f:
             config_dict = yaml.safe_load(f) 
         conn_str = config_dict[db]['conn_str']
         host = config_dict[db]['host']
         config_vars = {'conn_str':conn_str,'host':host}
-        print('config vars',db, config_vars)
     if ENV=='production':
         PCS = os.getenv('PROD_CONN_STR')
         config_vars = {'conn_str':PCS,'host':'n/a'}
+    print('config vars',db, config_vars)
     return config_vars
 
 
 # connect to database
 # db should be env but it's in so many places it's too much of a pain to change
 def db_connect(db:str, autocommit:bool = False):
-    pdb.set_trace()
     conn_str = config(db)['conn_str']
     conn = psycopg2.connect(conn_str)
     cur = conn.cursor()
@@ -60,7 +60,9 @@ def add_new_user(db:str, resp_newuser:NewUser)->int:
 def get_users(db:str)->tuple:
     user_dict={'user_id':[], 'user_name':[], 'dob':[],'sex':[],'team':[]}
     try:
+        print('db: ',db)
         conn, cur = db_connect(db)
+        print('get_users>conn,cur: ', conn, cur)
         cur.execute("SELECT * FROM users")
         uinfo = cur.fetchall()
         # if no user_name maches given user_id
