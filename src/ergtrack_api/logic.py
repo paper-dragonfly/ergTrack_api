@@ -5,14 +5,21 @@ from ergtrack_api.post_classes import NewInterval, NewUser, NewWorkout
 import pdb 
 import os 
 
+ENV = os.getenv('ENVIRONMENT')
+
+
 # get database parameters
 def config(db:str, config_file:str='config/config.yaml')-> dict:
-    with open(f'{config_file}', 'r') as f:
-        config_dict = yaml.safe_load(f) 
-    conn_str = config_dict[db]['conn_str']
-    host = config_dict[db]['host']
-    config_vars = {'conn_str':conn_str,'host':host}
-    print('config vars',db, config_vars)
+    if ENV != 'production':
+        with open(f'{config_file}', 'r') as f:
+            config_dict = yaml.safe_load(f) 
+        conn_str = config_dict[db]['conn_str']
+        host = config_dict[db]['host']
+        config_vars = {'conn_str':conn_str,'host':host}
+        print('config vars',db, config_vars)
+    if ENV=='production':
+        PCS = os.getenv('PROD_CONN_STR')
+        config_vars = {'conn_str':PCS,'host':'n/a'}
     return config_vars
 
 
