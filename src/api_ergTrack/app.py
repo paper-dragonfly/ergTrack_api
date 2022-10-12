@@ -1,8 +1,8 @@
 from flask import Flask, request 
 from pydantic import ValidationError 
-from ergtrack_api.post_classes import NewInterval, NewUser, NewWorkout
+from api_ergTrack.post_classes import NewInterval, NewUser, NewWorkout
 import json
-from ergtrack_api import logic as l
+from api_ergTrack import logic as l
 import pdb
 import os
 

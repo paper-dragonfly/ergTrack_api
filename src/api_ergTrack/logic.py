@@ -1,7 +1,7 @@
 import json
 import yaml
 import psycopg2 
-from ergtrack_api.post_classes import NewInterval, NewUser, NewWorkout
+from api_ergTrack.post_classes import NewInterval, NewUser, NewWorkout
 import pdb 
 import os 
 

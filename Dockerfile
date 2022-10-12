@@ -30,6 +30,6 @@ RUN python3 -m pip install -e . --no-deps
 
 #run app
 EXPOSE 5000
-CMD gunicorn src.ergtrack_api.app:app
+CMD gunicorn src.api_ergTrack.app:app
 # myIP: --add-host=Nicos-MacBook-Pro.local:192.168.1.6. 
 

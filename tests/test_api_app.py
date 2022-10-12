@@ -1,9 +1,9 @@
 import json 
 from tests import conftest as c
-from src.logic import add_new_user, db_connect, add_workout, add_interval, get_users
+from src.api_ergTrack.logic import add_new_user, db_connect, add_workout, add_interval, get_users
 from pydantic import BaseModel
 import pdb
-from post_classes import NewUser, NewInterval, NewWorkout
+from src.api_ergTrack.post_classes import NewUser, NewInterval, NewWorkout
 
 
 def test_01_users_GET(client):
