@@ -32,7 +32,7 @@ def db_connect(db:str, autocommit:bool = False):
     cur = conn.cursor()
     conn.autocommit = autocommit
     return conn, cur
-
+    
 
 # add new user to db
 def add_new_user(db:str, resp_newuser:NewUser)->int:
