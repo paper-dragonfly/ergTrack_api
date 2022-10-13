@@ -2,7 +2,7 @@ from src.logic import db_connect
 import pdb
 import os 
 
-ENV = os.getenv('ENVIRONMENT')
+ENV = os.getenv('ENV')
 
 def create_erg_db():
     conn, cur = db_connect('create_dbs_local', True)

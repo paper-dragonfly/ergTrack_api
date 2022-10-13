@@ -16,14 +16,14 @@ RUN mkdir -p ./src
 RUN mkdir -p ./tests
 RUN mkdir -p ./config 
 COPY src src 
-# COPY config.yaml config 
+COPY config.yaml config 
     # comment out ^ in production/when pushing to git
 COPY README.md .
 COPY tests tests
 COPY pyproject.toml . 
 COPY setup.cfg . 
 
-#build project into package - avoid import issues
+#build ergTrack_api project into package - avoid import issues
 RUN python3 -m pip install --upgrade build
 RUN python3 -m build
 RUN python3 -m pip install -e . --no-deps
@@ -31,5 +31,4 @@ RUN python3 -m pip install -e . --no-deps
 #run app
 EXPOSE 5000
 CMD gunicorn src.api_ergTrack.app:app
-# myIP: --add-host=Nicos-MacBook-Pro.local:192.168.1.6. 
 

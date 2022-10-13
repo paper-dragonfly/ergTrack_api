@@ -6,7 +6,7 @@ from api_ergTrack import logic as l
 import pdb
 import os
 
-ENV = os.getenv('ENVIRONMENT')
+ENV = os.getenv('ENV')
 
 def create_app(db):
     app = Flask(__name__) 
