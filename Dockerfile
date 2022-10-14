@@ -30,5 +30,5 @@ RUN python3 -m pip install -e . --no-deps
 
 #run app
 EXPOSE 5000
-CMD gunicorn src.api_ergTrack.app:app
+CMD gunicorn api_ergTrack.app:app
 
